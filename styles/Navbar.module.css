@@ -9,9 +9,21 @@
   border-bottom: 1px solid #eaeaea;
 }
 
+.address {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 10px;
+}
+
 .button {
   padding: 8px;
   background: #fafafa;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.button:hover {
+  color: #00EC82;
+  border-color: #00EC82;
 }
