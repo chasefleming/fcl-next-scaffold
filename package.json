@@ -4,6 +4,9 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:local": "flow emulator start & flow dev-wallet & NEXT_PUBLIC_FLOW_NETWORK=local npm run dev",
+    "dev:testnet": "NEXT_PUBLIC_FLOW_NETWORK=testnet npm run dev",
+    "dev:mainnet": "NEXT_PUBLIC_FLOW_NETWORK=mainnet npm run dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
