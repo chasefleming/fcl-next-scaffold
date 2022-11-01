@@ -10,8 +10,20 @@ This scaffold provides:
 
 ### Local with Dev Wallet and the Emulator
 
+In one terminal, run emulator: 
+
 ```bash
-npm run dev:local
+flow emulator start
+```
+
+Then, in another terminal, run Dev Wallet:
+
+```bash
+flow dev-wallet
+```
+
+```bash
+npm run dev:local:deploy
 ```
 
 ### Testnet

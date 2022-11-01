@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "dev:local": "flow emulator start & flow dev-wallet & NEXT_PUBLIC_FLOW_NETWORK=local npm run dev",
+    "dev:local": "NEXT_PUBLIC_FLOW_NETWORK=local npm run dev",
+    "dev:local:deploy": "flow project deploy --network=emulator --update && NEXT_PUBLIC_FLOW_NETWORK=local npm run dev",
     "dev:testnet": "NEXT_PUBLIC_FLOW_NETWORK=testnet npm run dev",
     "dev:mainnet": "NEXT_PUBLIC_FLOW_NETWORK=mainnet npm run dev",
     "build": "next build",
@@ -19,6 +20,7 @@
   },
   "devDependencies": {
     "eslint": "8.26.0",
-    "eslint-config-next": "13.0.0"
+    "eslint-config-next": "13.0.0",
+    "raw-loader": "^4.0.2"
   }
 }

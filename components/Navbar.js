@@ -1,26 +1,27 @@
 import * as fcl from '@onflow/fcl'
 import useCurrentUser from '../hooks/useCurrentUser'
-import styles from '../styles/Navbar.module.css'
+import navbarStyles from '../styles/Navbar.module.css'
+import elementStyles from '../styles/Elements.module.css'
 
 export default function Navbar() {
-  const { user } = useCurrentUser()
+  const user = useCurrentUser()
 
   return (
-    <div className={styles.navbar}>
+    <div className={navbarStyles.navbar}>
       {!user.loggedIn && 
         <button 
           onClick={fcl.authenticate} 
-          className={styles.button}>
+          className={elementStyles.button}>
           Log In With Wallet
         </button>
       }
       {user.loggedIn && 
         (
           <>
-            <div className={styles.address}>{ user?.addr }</div>
+            <div className={navbarStyles.address}>{ user?.addr }</div>
             <button 
               onClick={fcl.unauthenticate} 
-              className={styles.button}>
+              className={elementStyles.button}>
               Log Out
             </button>
           </>

@@ -8,5 +8,5 @@ export default function useCurrentUser() {
     fcl.currentUser.subscribe(setUser)
   }, [])
 
-  return { user }
+  return user
 }

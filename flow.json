@@ -4,10 +4,18 @@
 		"mainnet": "access.mainnet.nodes.onflow.org:9000",
 		"testnet": "access.devnet.nodes.onflow.org:9000"
 	},
+	"contracts": {
+    "HelloWorld": "./cadence/contracts/HelloWorld.cdc"
+  },
 	"accounts": {
 		"emulator-account": {
 			"address": "f8d6e0586b0a20c7",
 			"key": "ba68d45a5acaa52f3cacf4ad3a64d9523e0ce0ae3addb1ee6805385b380b7646"
 		}
-	}
+	},
+	"deployments": {
+    "emulator": {
+      "emulator-account": ["HelloWorld"]
+    }
+  }
 }

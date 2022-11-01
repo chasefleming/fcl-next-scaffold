@@ -3,8 +3,12 @@ import styles from '../styles/Home.module.css'
 import Navbar from '../components/Navbar'
 import '../flow/config.js'
 import Links from '../components/Links'
+import Container from '../components/Container'
+import useCurrentUser from '../hooks/useCurrentUser'
 
 export default function Home() {
+  const { loggedIn } = useCurrentUser()
+
   return (
     <div className={styles.container}>
 
@@ -24,6 +28,8 @@ export default function Home() {
         <p className={styles.description}>
           For the Flow Blockchain
         </p>
+
+        {loggedIn && <Container />}
 
         <Links />
 
