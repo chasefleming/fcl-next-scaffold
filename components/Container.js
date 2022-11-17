@@ -55,7 +55,7 @@ export default function Container() {
     setLastTransactionId(transactionId)
   }
   
-  const openExplorerLink = (transactionId, network) => window.open(`${BLOCK_EXPLORER_URLS[network]}/transaction/${transactionId}`)
+  const openExplorerLink = (transactionId, network) => window.open(`${BLOCK_EXPLORER_URLS[network]}/transaction/${transactionId}`, '_blank')
 
   return (
     <div className={containerStyles.container}>
