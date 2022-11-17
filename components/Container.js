@@ -14,6 +14,9 @@ export default function Container() {
   const [transactionStatus, setTransactionStatus] = useState('N/A')
   const { network } = useConfig()
 
+  const isEmulator = network => network !== 'mainnet' && network !== 'testnet'
+  const isSealed = statusCode => statusCode === 4 // 4: 'SEALED'
+
   useEffect(() => {
     if (lastTransactionId) {
       console.log('Last Transaction ID: ', lastTransactionId)
@@ -22,7 +25,7 @@ export default function Container() {
         setTransactionStatus(res.statusString)
   
         // Query for new chain string again if status is sealed
-        if (res.status === 4) { // 4: 'SEALED'
+        if (isSealed(res.status)) {
           queryChain()
         }
       })
@@ -51,7 +54,7 @@ export default function Container() {
 
     setLastTransactionId(transactionId)
   }
-
+  
   const openExplorerLink = (transactionId, network) => window.open(`${BLOCK_EXPLORER_URLS[network]}/transaction/${transactionId}`)
 
   return (
@@ -64,7 +67,7 @@ export default function Container() {
       <hr />
       <div>
         <h2>Mutate the Chain</h2>
-        {(network === 'local' || network === 'mainnet') && (
+        {!isEmulator(network) && (
           <h4>Latest Transaction ID: <a className={elementStyles.link} onClick={() => {openExplorerLink(lastTransactionId, network)}}>{ lastTransactionId }</a></h4>
         )}
         <h4>Latest Transaction Status: { transactionStatus }</h4>
