@@ -1,14 +1,33 @@
 import * as fcl from "@onflow/fcl"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import ReadHelloWorld from '../cadence/scripts/ReadHelloWorld.cdc'
 import UpdateHelloWorld from '../cadence/transactions/UpdateHelloWorld.cdc'
 import elementStyles from '../styles/Elements.module.css'
 import containerStyles from '../styles/Container.module.css'
+import useConfig from "../hooks/useConfig"
+import { BLOCK_EXPLORER_URLS } from "../constants"
 
 export default function Container() {
   const [chainGreeting, setChainGreeting] = useState('?')
   const [userGreetingInput, setUserGreetingInput] = useState('')
+  const [lastTransactionId, setLastTransactionId] = useState()
   const [transactionStatus, setTransactionStatus] = useState('N/A')
+  const { network } = useConfig()
+
+  useEffect(() => {
+    if (lastTransactionId) {
+      console.log('Last Transaction ID: ', lastTransactionId)
+
+      fcl.tx(lastTransactionId).subscribe(res => {
+        setTransactionStatus(res.statusString)
+  
+        // Query for new chain string again if status is sealed
+        if (res.status === 4) { // 4: 'SEALED'
+          queryChain()
+        }
+      })
+    }
+  }, [lastTransactionId])
 
   const queryChain = async () => {
     const res = await fcl.query({
@@ -30,15 +49,10 @@ export default function Container() {
       args: (arg, t) => [arg(userGreetingInput, t.String)]
     })
 
-    fcl.tx(transactionId).subscribe(res => {
-      setTransactionStatus(res.statusString)
-
-      // Query for new chain string again if status is sealed
-      if (res.status === 4) { // 4: 'SEALED'
-        queryChain()
-      }
-    })
+    setLastTransactionId(transactionId)
   }
+
+  const openExplorerLink = (transactionId, network) => window.open(`${BLOCK_EXPLORER_URLS[network]}/transaction/${transactionId}`)
 
   return (
     <div className={containerStyles.container}>
@@ -50,6 +64,9 @@ export default function Container() {
       <hr />
       <div>
         <h2>Mutate the Chain</h2>
+        {(network === 'local' || network === 'mainnet') && (
+          <h4>Latest Transaction ID: <a className={elementStyles.link} onClick={() => {openExplorerLink(lastTransactionId, network)}}>{ lastTransactionId }</a></h4>
+        )}
         <h4>Latest Transaction Status: { transactionStatus }</h4>
         <form onSubmit={mutateGreeting}>
           <label>
