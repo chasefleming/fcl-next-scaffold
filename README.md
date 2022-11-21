@@ -1,13 +1,21 @@
 This is a scaffold for an FCL NextJS Dapp on the Flow Blockchain.
 
-This scaffold provides:
+## Features Provided
 
-- FCL setup and configuration for all networks
+- FCL setup and configuration
 - Discovery for wallet integration (including Emulator)
 - Flow.json loading for contract placeholders
 - Authentication
 - CDC file loader
 - Custom hooks
+- Deployment 
+
+## Featues TODO
+
+- Testnet account setup
+- Testnet deployment
+- Mainnet deployment
+- JS Testing
 
 ## Running the App
 
