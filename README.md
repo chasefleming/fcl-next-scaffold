@@ -37,15 +37,3 @@ flow dev-wallet
 ```bash
 npm run dev:local:deploy
 ```
-
-### Testnet
-
-```bash
-npm run dev:testnet
-```
-
-### Mainnet
-
-```bash
-npm run dev:mainnet
-```
