@@ -13,8 +13,6 @@ This is a scaffold for an FCL NextJS Dapp on the Flow Blockchain.
 
 ## Featues TODO
 
-- Testnet account setup
-- Testnet deployment
 - Mainnet deployment
 - JS Testing
 
@@ -37,3 +35,21 @@ flow dev-wallet
 ```bash
 npm run dev:local:deploy
 ```
+
+### Testnet
+
+If you haven't yet created a testnet account, in the CLI run:
+
+```
+flow accounts create
+```
+
+Follow the steps and select testnet. This will create a `testnet-account.private.json` file.
+
+Then in `flow.json`, add your testnet address prefixed with an `0x` as an alias for `testnet` just like `emulator`.
+
+Then run:
+
+```
+npm run dev:testnet:deploy
+``` 
