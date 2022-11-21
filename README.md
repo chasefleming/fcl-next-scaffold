@@ -4,7 +4,7 @@ This is a scaffold for an FCL NextJS Dapp on the Flow Blockchain.
 
 - FCL setup and configuration
 - Discovery for wallet integration (including Emulator)
-- CLI private key separate for security
+- CLI private key separation for security
 - Flow.json loading for contract placeholders
 - Authentication
 - CDC file loader
