@@ -1,11 +1,11 @@
-import * as fcl from "@onflow/fcl"
-import { useEffect, useState } from "react"
+import * as fcl from '@onflow/fcl'
+import { useEffect, useState } from 'react'
 import ReadHelloWorld from '../cadence/scripts/ReadHelloWorld.cdc'
 import UpdateHelloWorld from '../cadence/transactions/UpdateHelloWorld.cdc'
 import elementStyles from '../styles/Elements.module.css'
 import containerStyles from '../styles/Container.module.css'
-import useConfig from "../hooks/useConfig"
-import { BLOCK_EXPLORER_URLS } from "../constants"
+import useConfig from '../hooks/useConfig'
+import { createExplorerTransactionLink } from '../helpers/links'
 
 export default function Container() {
   const [chainGreeting, setChainGreeting] = useState('?')
@@ -55,7 +55,7 @@ export default function Container() {
     setLastTransactionId(transactionId)
   }
   
-  const openExplorerLink = (transactionId, network) => window.open(`${BLOCK_EXPLORER_URLS[network]}/transaction/${transactionId}`, '_blank')
+  const openExplorerLink = (transactionId, network) => window.open(createExplorerTransactionLink({ network, transactionId }), '_blank')
 
   return (
     <div className={containerStyles.container}>
@@ -74,14 +74,14 @@ export default function Container() {
         <form onSubmit={mutateGreeting}>
           <label>
             <input
-              type="text"
-              placeholder="New Greeting"
+              type='text'
+              placeholder='New Greeting'
               value={userGreetingInput}
               onChange={e => setUserGreetingInput(e.target.value)}
               className={elementStyles.input}
             />
           </label>
-          <input type="submit" value="Submit" className={elementStyles.button} />
+          <input type='submit' value='Submit' className={elementStyles.button} />
         </form>
       </div>
     </div>
