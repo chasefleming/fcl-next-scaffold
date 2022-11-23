@@ -18,6 +18,12 @@ This is a scaffold for an FCL NextJS Dapp on the Flow Blockchain.
 
 ## Running the App
 
+First run:
+
+```
+npm install
+```
+
 ### Local with Dev Wallet and the Emulator
 
 In one terminal, run emulator: 
