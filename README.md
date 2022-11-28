@@ -59,3 +59,9 @@ Then run:
 ```
 npm run dev:testnet:deploy
 ``` 
+
+Whenever you need to redeploy changed contracts to Testnet, you can run:
+
+```
+npm run dev:testnet:update
+```
