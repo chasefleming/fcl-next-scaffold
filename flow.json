@@ -15,19 +15,11 @@
 	"accounts": {
 		"emulator-account": {
 			"fromFile": "./emulator.private.json"
-		},
-		"testnet-account": {
-			"fromFile": "./testnet-account.private.json"
 		}
 	},
 	"deployments": {
 		"emulator": {
 			"emulator-account": [
-				"HelloWorld"
-			]
-		},
-		"testnet": {
-			"testnet-account": [
 				"HelloWorld"
 			]
 		}

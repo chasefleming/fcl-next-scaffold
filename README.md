@@ -54,6 +54,26 @@ Follow the steps and select testnet. This will create a `testnet-account.private
 
 Then in `flow.json`, add your testnet address prefixed with an `0x` as an alias for `testnet` just like `emulator`.
 
+You'll also need to add your new testnet account to your flow.json:
+
+```
+// Inside of "accounts"
+"testnet-account": {
+	"fromFile": "./testnet-account.private.json"
+}
+```
+
+And add a deployment for this account:
+
+```
+// Inside of "deployments"
+"testnet": {
+  "testnet-account": [
+    "HelloWorld"
+  ]
+}
+```
+
 Then run:
 
 ```
