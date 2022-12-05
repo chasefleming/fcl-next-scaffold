@@ -1,7 +1,5 @@
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import Navbar from '../components/Navbar'
-import '../config/fcl.js'
 import Links from '../components/Links'
 import Container from '../components/Container'
 import useCurrentUser from '../hooks/useCurrentUser'
@@ -11,8 +9,6 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-
-      <Navbar />
 
       <Head>
         <title>FCL Next Scaffold</title>
