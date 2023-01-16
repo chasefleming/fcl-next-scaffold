@@ -1,4 +1,4 @@
-import HelloWorld from 0xHelloWorld
+import "HelloWorld"
 
 transaction(greeting: String) {
 
