@@ -32,8 +32,6 @@ In one terminal, run emulator:
 flow emulator start
 ```
 
-Once emulator is running, grab the private key and update the `.env` file.
-
 Then, in another terminal, run Dev Wallet:
 
 ```bash
@@ -65,9 +63,7 @@ You'll also need to add your new testnet account to your flow.json:
 }
 ```
 
-Or you can set it up with environment variables the same way the `emulator-account` is configured.
-
-Then, add a deployment for this account:
+And add a deployment for this account:
 
 ```
 // Inside of "deployments"
