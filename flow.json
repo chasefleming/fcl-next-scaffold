@@ -1,11 +1,6 @@
 {
 	"contracts": {
-		"HelloWorld": {
-			"source": "./cadence/contracts/HelloWorld.cdc",
-			"aliases": {
-				"emulator": "0xf8d6e0586b0a20c7"
-			}
-		}
+		"HelloWorld": "./cadence/contracts/HelloWorld.cdc"
 	},
 	"networks": {
 		"emulator": "127.0.0.1:3569",

@@ -1,4 +1,4 @@
-import HelloWorld from 0xHelloWorld
+import "HelloWorld"
 
 pub fun main(): String {
   return HelloWorld.greeting
