@@ -24,23 +24,15 @@ First run:
 npm install
 ```
 
-### Local with Dev Wallet and the Emulator
+### Local with Flow Dev, the Emulator, and Dev Wallet
 
-In one terminal, run emulator: 
-
-```bash
-flow emulator start
-```
-
-Then, in another terminal, run Dev Wallet:
+Run the following to run Flow Dev, the Emulator, and Dev Wallet:
 
 ```bash
-flow dev-wallet
+npm run dev:local
 ```
 
-```bash
-npm run dev:local:deploy
-```
+Note: Flow Dev will will automatically create new accounts and deploy for you while developing. Your flow.json will be updated automatically. Committing these changes for local development is unncessary.
 
 ### Testnet
 
