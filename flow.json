@@ -9,7 +9,11 @@
 	},
 	"accounts": {
 		"emulator-account": {
-			"fromFile": "./emulator.private.json"
+			"address": "f8d6e0586b0a20c7",
+			"key": {
+				"type": "file",
+				"location": "./emulator.key"
+			}
 		}
 	},
 	"deployments": {
