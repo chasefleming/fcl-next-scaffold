@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "dev:local": "NEXT_PUBLIC_FLOW_NETWORK=local npm run dev",
+    "dev:local": "flow dev && NEXT_PUBLIC_FLOW_NETWORK=local npm run dev",
     "dev:local:deploy": "flow project deploy --network=emulator --update && NEXT_PUBLIC_FLOW_NETWORK=local npm run dev",
     "dev:testnet": "NEXT_PUBLIC_FLOW_NETWORK=testnet npm run dev",
     "dev:testnet:deploy": "flow project deploy --network=testnet --update && NEXT_PUBLIC_FLOW_NETWORK=testnet npm run dev",
