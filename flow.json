@@ -1,7 +1,5 @@
 {
-	"contracts": {
-		"HelloWorld": "cadence/contracts/HelloWorld.cdc"
-	},
+	"contracts": {},
 	"networks": {
 		"emulator": "127.0.0.1:3569",
 		"mainnet": "access.mainnet.nodes.onflow.org:9000",
