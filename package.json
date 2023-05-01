@@ -3,13 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "dev:local": "NEXT_PUBLIC_FLOW_NETWORK=local npm run dev",
+    "dev": "NEXT_PUBLIC_FLOW_NETWORK=local next dev",
+    "dev-wait": "npm run dev & wait-on tcp:8888 tcp:8701 tcp:3000",
+    "dev:local": "concurrently \"npm run flow:emulator\" \"npm run flow:dev-wallet\" \"npm run dev:local:flow\"",
+    "dev:local:flow": "npm run dev-wait && npm run flow:dev",
     "dev:local:deploy": "flow project deploy --network=emulator --update && NEXT_PUBLIC_FLOW_NETWORK=local npm run dev",
     "dev:testnet": "NEXT_PUBLIC_FLOW_NETWORK=testnet npm run dev",
     "dev:testnet:deploy": "flow project deploy --network=testnet --update && NEXT_PUBLIC_FLOW_NETWORK=testnet npm run dev",
-    "dev:testnet:update": "flow project deploy --network=testnet --update",
+    "dev:testnet:update": "flow project deploy --network=testnet --update --show-diff",
     "dev:mainnet": "NEXT_PUBLIC_FLOW_NETWORK=mainnet npm run dev",
+    "flow:dev": "flow dev",
+    "flow:emulator": "flow emulator",
+    "flow:dev-wallet": "flow dev-wallet",
     "test": "jest",
     "build": "next build",
     "start": "next start",
@@ -24,10 +29,12 @@
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
+    "concurrently": "^8.0.1",
     "eslint": "8.26.0",
     "eslint-config-next": "13.0.0",
     "jest": "^29.3.1",
     "jest-environment-jsdom": "^29.3.1",
-    "raw-loader": "^4.0.2"
+    "raw-loader": "^4.0.2",
+    "wait-on": "^7.0.1"
   }
 }
