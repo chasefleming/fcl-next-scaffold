@@ -42,20 +42,9 @@ If you haven't yet created a testnet account, in the CLI run:
 flow accounts create
 ```
 
-Follow the steps and select testnet. This will create a `testnet-account.private.json` file.
+Follow the steps and select testnet. This will create a `[name].pkey` file (make sure this is gitignored) and add your account to flow.json.
 
-Then in `flow.json`, add your testnet address prefixed with an `0x` as an alias for `testnet` just like `emulator`.
-
-You'll also need to add your new testnet account to your flow.json:
-
-```
-// Inside of "accounts"
-"testnet-account": {
-	"fromFile": "./testnet-account.private.json"
-}
-```
-
-And add a deployment for this account:
+Then in `flow.json`, add the contracts you'd like to be deployed to testnet under this account:
 
 ```
 // Inside of "deployments"
@@ -72,7 +61,7 @@ Then run:
 npm run dev:testnet:deploy
 ``` 
 
-Whenever you need to redeploy changed contracts to Testnet, you can run:
+Whenever you need to redeploy changed contracts to Testnet while seeing the diff between deployed contracts and updates being pushed, you can run:
 
 ```
 npm run dev:testnet:update

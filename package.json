@@ -10,7 +10,7 @@
     "dev:local:deploy": "flow project deploy --network=emulator --update && NEXT_PUBLIC_FLOW_NETWORK=local npm run dev",
     "dev:testnet": "NEXT_PUBLIC_FLOW_NETWORK=testnet npm run dev",
     "dev:testnet:deploy": "flow project deploy --network=testnet --update && NEXT_PUBLIC_FLOW_NETWORK=testnet npm run dev",
-    "dev:testnet:update": "flow project deploy --network=testnet --update",
+    "dev:testnet:update": "flow project deploy --network=testnet --update --show-diff",
     "dev:mainnet": "NEXT_PUBLIC_FLOW_NETWORK=mainnet npm run dev",
     "flow:dev": "flow dev",
     "flow:emulator": "flow emulator",
