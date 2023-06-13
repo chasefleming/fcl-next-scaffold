@@ -21,7 +21,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@onflow/fcl": "1.4.0",
+    "@onflow/fcl": "1.4.1",
     "@onflow/typedefs": "1.1.0",
     "next": "13.0.0",
     "react": "18.2.0",
