@@ -10,8 +10,8 @@ import { createExplorerTransactionLink } from '../helpers/links'
 export default function Container() {
   const [chainGreeting, setChainGreeting] = useState('?')
   const [userGreetingInput, setUserGreetingInput] = useState('')
-  const [lastTransactionId, setLastTransactionId] = useState()
-  const [transactionStatus, setTransactionStatus] = useState('N/A')
+  const [lastTransactionId, setLastTransactionId] = useState<string>()
+  const [transactionStatus, setTransactionStatus] = useState<number>()
   const { network } = useConfig()
 
   const isEmulator = network => network !== 'mainnet' && network !== 'testnet'
@@ -49,7 +49,7 @@ export default function Container() {
 
     const transactionId = await fcl.mutate({
       cadence: UpdateHelloWorld,
-      args: (arg, t) => [arg(userGreetingInput, t.String)]
+      args: (arg, t) => [arg(userGreetingInput, t.String)],
     })
 
     setLastTransactionId(transactionId)
