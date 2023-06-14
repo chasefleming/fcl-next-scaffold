@@ -1,6 +1,6 @@
 {
   "name": "fcl-next-scaffold",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "private": true,
   "scripts": {
     "dev": "cross-env NEXT_PUBLIC_FLOW_NETWORK=local next dev",
