@@ -2,7 +2,8 @@ pub contract HelloWorld {
 
   pub var greeting: String
 
-  pub fun changeGreeting(newGreeting: String) {
+  access(all)
+  fun changeGreeting(newGreeting: String) {
     self.greeting = newGreeting
   }
 
