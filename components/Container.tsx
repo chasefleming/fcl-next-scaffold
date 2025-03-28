@@ -6,16 +6,17 @@ import elementStyles from '../styles/Elements.module.css'
 import containerStyles from '../styles/Container.module.css'
 import useConfig from '../hooks/useConfig'
 import { createExplorerTransactionLink } from '../helpers/links'
+import { TransactionExecutionStatus } from '@onflow/typedefs'
 
 export default function Container() {
   const [chainGreeting, setChainGreeting] = useState('?')
   const [userGreetingInput, setUserGreetingInput] = useState('')
   const [lastTransactionId, setLastTransactionId] = useState<string>()
-  const [transactionStatus, setTransactionStatus] = useState<number>()
+  const [transactionStatus, setTransactionStatus] = useState<string>()
   const { network } = useConfig()
 
-  const isEmulator = network => network !== 'mainnet' && network !== 'testnet'
-  const isSealed = statusCode => statusCode === 4 // 4: 'SEALED'
+  const isEmulator = (network: string) => network !== 'mainnet' && network !== 'testnet'
+  const isExecuted = (statusCode: TransactionExecutionStatus) => statusCode === TransactionExecutionStatus.EXECUTED
 
   useEffect(() => {
     if (lastTransactionId) {
@@ -24,8 +25,9 @@ export default function Container() {
       fcl.tx(lastTransactionId).subscribe(res => {
         setTransactionStatus(res.statusString)
   
-        // Query for new chain string again if status is sealed
-        if (isSealed(res.status)) {
+        // Query for new chain string again if status is executed (soft finality)
+        // If we require hard finality, we can wait for the transaction to be sealed instead
+        if (isExecuted(res.status)) {
           queryChain()
         }
       })
