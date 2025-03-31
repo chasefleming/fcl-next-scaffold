@@ -1,6 +1,6 @@
-pub contract HelloWorld {
+access(all) contract HelloWorld {
 
-  pub var greeting: String
+  access(all) var greeting: String
 
   access(all)
   fun changeGreeting(newGreeting: String) {
