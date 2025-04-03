@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@onflow/fcl": "1.15.0",
-    "@onflow/kit": "^0.0.1-kit.0",
+    "@onflow/kit": "^0.0.1-kit.3",
     "@onflow/typedefs": "1.4.1",
     "next": "13.0.0",
     "react": "18.2.0",
