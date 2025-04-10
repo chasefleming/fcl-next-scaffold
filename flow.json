@@ -3,7 +3,7 @@
     "HelloWorld": {
       "source": "cadence/contracts/HelloWorld.cdc",
       "aliases": {
-        "testnet": "0xb9f9215c1042f1bc"
+        "testnet": "94e22a0173052da2"
       }
     }
   },
