@@ -15,6 +15,7 @@ export default function DefaultLayout({
       config={{
         flowNetwork,
         accessNodeUrl: ACCESS_NODE_URLS[flowNetwork],
+        discoveryWallet: `https://fcl-discovery.onflow.org/${flowNetwork}/authn`,
         appDetailTitle: "FCL Next Scaffold", // optional
         appDetailIcon: "https://avatars.githubusercontent.com/u/62387156?v=4", // optional
         appDetailUrl: "https://yourapp.com", // optional
