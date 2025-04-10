@@ -1,32 +1,46 @@
-This is a scaffold for an FCL NextJS Dapp on the Flow Blockchain.
+This is a scaffold for an a NextJS App on the Flow Blockchain. It uses `@onflow/kit` which is a React library built on top of [FCL](https://github.com/onflow/fcl-js)
 
 ## Features Provided
 
-- FCL setup and configuration
+- `@onflow/kit` setup and configuration
 - Wallet Discovery (including Dev Wallet on Emulator)
 - CLI private key separation for security
 - Flow.json loading for contract placeholders
 - Authentication
 - CDC file loader
 - Custom hooks
-- Deployment 
 
-## Featues TODO
+## Requirements
 
-- Mainnet deployment
-- JS Testing
+- Node.js
+- [Flow CLI](https://docs.onflow.org/flow-cli/install/)
 
 ## Running the App
 
-First run:
+First run the Emulator:
 
 ```
-npm install
+flow emulator
 ```
 
-### Local with the Emulator and Dev Wallet
+Then run dev wallet for local wallet usage:
 
-Run the following to run the Emulator and Dev Wallet:
+```
+flow dev-wallet
+```
+
+Then run the app:
+
+```
+npm run dev:local
+```
+```
+npm run dev:emulator
+```
+
+### Running Tesnet
+
+Run the following the Emulator:
 
 ```bash
 npm run dev:local
@@ -34,33 +48,12 @@ npm run dev:local
 
 ### Testnet
 
-If you haven't yet created a testnet account, in the CLI run:
+To run against an already deployed contract on Testnet with a non-dev wallet, you can use the following command:
 
 ```
-flow accounts create
+npm run dev:testnet
 ```
 
-Follow the steps and select testnet. This will create a `[name].pkey` file (make sure this is gitignored) and add your account to flow.json.
+## Learning More
 
-Then in `flow.json`, add the contracts you'd like to be deployed to testnet under this account:
-
-```
-// Inside of "deployments"
-"testnet": {
-  "testnet-account": [
-    "HelloWorld"
-  ]
-}
-```
-
-Then run:
-
-```
-npm run dev:testnet:deploy
-``` 
-
-Whenever you need to redeploy changed contracts to Testnet while seeing the diff between deployed contracts and updates being pushed, you can run:
-
-```
-npm run dev:testnet:update
-```
+To learn more about Flow, Flow CLI, and front end development on Flow, check out the [Getting Started](https://developers.flow.com/build/getting-started/contract-interaction) guide.
