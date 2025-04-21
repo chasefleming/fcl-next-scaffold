@@ -25,7 +25,9 @@ export default function Container() {
     isLoading: isQueryLoading,
   } = useFlowQuery({
     cadence: ReadHelloWorld,
-    enabled: true,
+    query: {
+      enabled: true,
+    },
   });
 
   const {
@@ -35,7 +37,7 @@ export default function Container() {
     error: mutationError,
   } = useFlowMutate();
 
-  const { transactionStatus } = useFlowTransaction(transactionId || "");
+  const { transactionStatus } = useFlowTransaction({ id: transactionId || "" });
 
   useEffect(() => {
     if (transactionId && transactionStatus?.status === 4) {

@@ -17,9 +17,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@onflow/fcl": "1.15.0",
-    "@onflow/kit": "^0.0.1-kit.5",
-    "@onflow/typedefs": "1.4.1",
+    "@onflow/kit": "file:../fcl-js/packages/kit/onflow-kit-0.0.1-kit.5.tgz",
     "next": "13.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"
