@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import {
   useFlowQuery,
   useFlowMutate,
-  useFlowTransaction,
+  useFlowTransactionStatus,
   useFlowConfig,
+  useFlowRevertibleRandom,
 } from "@onflow/kit";
 import ReadHelloWorld from "../cadence/scripts/ReadHelloWorld.cdc";
 import UpdateHelloWorld from "../cadence/transactions/UpdateHelloWorld.cdc";
@@ -16,18 +17,14 @@ export default function Container() {
   const [lastTransactionId, setLastTransactionId] = useState<string>();
   const { flowNetwork } = useFlowConfig();
 
-  const isEmulator = (network: string) =>
-    network !== "mainnet" && network !== "testnet";
-
+  // Section: Hello World Query
   const {
     data: chainGreeting,
     refetch: refetchGreeting,
     isLoading: isQueryLoading,
   } = useFlowQuery({
     cadence: ReadHelloWorld,
-    query: {
-      enabled: true,
-    },
+    query: { enabled: true },
   });
 
   const {
@@ -37,8 +34,11 @@ export default function Container() {
     error: mutationError,
   } = useFlowMutate();
 
-  const { transactionStatus } = useFlowTransaction({ id: transactionId || "" });
+  const { transactionStatus } = useFlowTransactionStatus({
+    id: transactionId || "",
+  });
 
+  // Refetch greeting after transaction seals
   useEffect(() => {
     if (transactionId && transactionStatus?.status === 4) {
       refetchGreeting();
@@ -47,12 +47,10 @@ export default function Container() {
 
   const mutateGreeting = (event: React.FormEvent) => {
     event.preventDefault();
-
     if (!userGreetingInput.length) {
       alert("Please add a new greeting string.");
       return;
     }
-
     mutate({
       cadence: UpdateHelloWorld,
       args: (arg, t) => [arg(userGreetingInput, t.String)],
@@ -72,8 +70,19 @@ export default function Container() {
     }
   };
 
+  const {
+    data: randomResults,
+    refetch: refetchRandom,
+    isLoading: isRandomLoading,
+    error: randomError,
+  } = useFlowRevertibleRandom({ max: "100", count: 3 });
+
+  const isEmulator = (network: string) =>
+    network !== "mainnet" && network !== "testnet";
+
   return (
     <div className={containerStyles.container}>
+      {/* Query the Chain */}
       <h2>Query the Chain</h2>
       <div>
         <button
@@ -87,7 +96,10 @@ export default function Container() {
           {isQueryLoading ? "Loading..." : String(chainGreeting ?? "?")}
         </h4>
       </div>
+
       <hr />
+
+      {/* Mutate the Chain */}
       <div>
         <h2>Mutate the Chain</h2>
         {!isEmulator(flowNetwork) && lastTransactionId && (
@@ -123,6 +135,30 @@ export default function Container() {
           <p style={{ color: "red" }}>Error: {mutationError.message}</p>
         )}
       </div>
+
+      <hr />
+
+      {/* Random UInt256 Test */}
+      <h2>Random Number Test</h2>
+      <button onClick={refetchRandom} className={elementStyles.button}>
+        Generate 3 Random Numbers
+      </button>
+
+      {isRandomLoading && <p>Loading random numbers…</p>}
+      {randomError && (
+        <p style={{ color: "red" }}>Error: {randomError.message}</p>
+      )}
+
+      {!isRandomLoading && !randomError && (
+        <ul>
+          {randomResults?.map((r, idx) => (
+            <li key={idx}>
+              <strong>#{idx + 1}</strong>: value = {r.value}, blockHeight = 
+              {r.blockHeight}
+            </li>
+          )) ?? <li>No results</li>}
+        </ul>
+      )}
     </div>
   );
 }
