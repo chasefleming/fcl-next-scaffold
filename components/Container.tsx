@@ -5,6 +5,7 @@ import {
   useFlowTransactionStatus,
   useFlowConfig,
   useFlowRevertibleRandom,
+  TransactionDialog,
 } from "@onflow/kit";
 import ReadHelloWorld from "../cadence/scripts/ReadHelloWorld.cdc";
 import UpdateHelloWorld from "../cadence/transactions/UpdateHelloWorld.cdc";
@@ -15,6 +16,7 @@ import { createExplorerTransactionLink } from "../helpers/links";
 export default function Container() {
   const [userGreetingInput, setUserGreetingInput] = useState("");
   const [lastTransactionId, setLastTransactionId] = useState<string>();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { flowNetwork } = useFlowConfig();
 
   // Section: Hello World Query
@@ -42,6 +44,8 @@ export default function Container() {
   useEffect(() => {
     if (transactionId && transactionStatus?.status === 4) {
       refetchGreeting();
+      // Only close dialog after transaction is sealed
+      setIsDialogOpen(false);
     }
   }, [transactionStatus?.status, transactionId, refetchGreeting]);
 
@@ -56,6 +60,7 @@ export default function Container() {
       args: (arg, t) => [arg(userGreetingInput, t.String)],
     });
     setLastTransactionId(transactionId);
+    setIsDialogOpen(true);
   };
 
   const openExplorerLink = () => {
@@ -82,6 +87,15 @@ export default function Container() {
 
   return (
     <div className={containerStyles.container}>
+      <TransactionDialog
+        open={isDialogOpen}
+        onOpenChange={setIsDialogOpen}
+        txId={transactionId}
+        pendingTitle="Updating Greeting..."
+        successTitle="Greeting Updated!"
+        closeOnSuccess={false}
+      />
+      
       {/* Query the Chain */}
       <h2>Query the Chain</h2>
       <div>
